@@ -27,9 +27,20 @@ export class MyApp {
 
   lookForNetwork(){
     
+    //While app open
+    if(this.network.type == 'none'){
+      console.log('Internet is not there while open app');
+      let toast = this.toastCtrl.create({
+        message: 'Internet Not Available../!',
+        duration: 3000,
+        position: 'middle'
+      });
+      toast.present();
+    }
+
+    //While app is running
     let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      
-      console.log('network was disconnected :-(');
+      console.log('Network disconnected :-(');
       
       let toast = this.toastCtrl.create({
         message: 'Network disconnected../!',
@@ -37,20 +48,18 @@ export class MyApp {
         position: 'top'
       });
       toast.present();
-
     });
 
+    //While app is running
     let connectSubscription = this.network.onConnect().subscribe(() => {  
-      
       console.log('network connected!');
-     
+    
       let toast = this.toastCtrl.create({
         message: 'Network connected../!',
         duration: 3000,
         position: 'top'
       });
       toast.present();
-
     });
   }
 }
