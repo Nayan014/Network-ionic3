@@ -1,4 +1,5 @@
-Showing Tost Message if Internet connected/disconnected. <br />
+1) Showing Tost Message if Internet connected/disconnected. <br />
+2) Showing current Network(2G/3G/4G/5G...) informaction. <br />
 
 Source: <br/>
 https://ionicframework.com/docs/native/network/  <br />
