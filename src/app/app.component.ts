@@ -1,21 +1,56 @@
 import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, ToastController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
+import { Network } from '@ionic-native/network';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = HomePage;
+  rootPage:string = 'HomePage';
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(
+    private platform: Platform,
+    private network: Network,
+    private toastCtrl: ToastController,
+    statusBar: StatusBar,
+    splashScreen: SplashScreen) {
     platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
       splashScreen.hide();
+      
+      this.lookForNetwork();
+    });
+  }
+
+  lookForNetwork(){
+    
+    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+      
+      console.log('network was disconnected :-(');
+      
+      let toast = this.toastCtrl.create({
+        message: 'Network disconnected../!',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+
+    });
+
+    let connectSubscription = this.network.onConnect().subscribe(() => {  
+      
+      console.log('network connected!');
+     
+      let toast = this.toastCtrl.create({
+        message: 'Network connected../!',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+
     });
   }
 }

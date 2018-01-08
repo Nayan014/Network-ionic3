@@ -3,23 +3,20 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html',
+  selector: 'page-page1',
+  templateUrl: 'page1.html',
 })
-export class HomePage {
+export class Page1Page {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-  
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad HomePage');
+    console.log('ionViewDidLoad Page1Page');
   }
 
   nevagateToPage(page): void{
     this.navCtrl.push(page);
   }
-
-
 
 }
